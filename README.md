@@ -2,7 +2,7 @@
 1. 青龙面板创建订阅
 
 ```shell
-ql repo https://github.com/KunCheng-He/hifini-sign-in.git
+ql repo https://github.com/afashi/sign.git
 ```
 
 2. 添加依赖
