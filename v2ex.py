@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+"""
+cron: 1 0 0 * * *
+new Env('V2EX');
+"""
 import os
 import re
 
@@ -7,7 +12,6 @@ import urllib3
 from notify import send
 
 urllib3.disable_warnings()
-
 
 def sign(headers):
     msg = []
