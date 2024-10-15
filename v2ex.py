@@ -13,6 +13,7 @@ from notify import send
 
 urllib3.disable_warnings()
 
+
 def sign(headers):
     msg = []
     response = requests.get(url="https://www.v2ex.com/mission/daily", headers=headers, verify=False)
@@ -69,16 +70,15 @@ def start(cookie_str):
     max_retries = 3
     retries = 0
     msg = ""
-    while retries < max_retries:
-        headers = {
-            "cookie": cookie_str,
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66",
-            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-            "accept-language": "zh-CN,zh;q=0.9,en;q=0.8",
-        }
-        msg += "第{}次执行签到\n".format(str(retries + 1))
-        msg1 = sign(headers=headers)
-        msg = "\n".join([f"{one.get('name')}: {one.get('value')}" for one in msg1])
+    headers = {
+        "cookie": cookie_str,
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66",
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+        "accept-language": "zh-CN,zh;q=0.9,en;q=0.8",
+    }
+    msg += "第{}次执行签到\n".format(str(retries + 1))
+    msg1 = sign(headers=headers)
+    msg = "\n".join([f"{one.get('name')}: {one.get('value')}" for one in msg1])
     send("V2EX 签到结果", msg)
     return msg
 
