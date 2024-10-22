@@ -86,6 +86,7 @@ def start(cookie_str):
             continue  # 发生异常则重试
     else:
         msg += "多次尝试后签到失败，请检查网络或cookie状态。\n"
+    print("V2EX 签到结果" + msg)
     send("V2EX 签到结果", msg)
     return msg
 
