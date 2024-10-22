@@ -68,7 +68,6 @@ def sign(headers):
 
 def start(cookie_str):
     max_retries = 3
-    retries = 0
     msg = ""
     headers = {
         "cookie": cookie_str,
@@ -76,9 +75,17 @@ def start(cookie_str):
         "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
         "accept-language": "zh-CN,zh;q=0.9,en;q=0.8",
     }
-    msg += "第{}次执行签到\n".format(str(retries + 1))
-    msg1 = sign(headers=headers)
-    msg = "\n".join([f"{one.get('name')}: {one.get('value')}" for one in msg1])
+    for attempt in range(max_retries):
+        msg += f"第{attempt + 1}次执行签到\n"
+        try:
+            msg1 = sign(headers=headers)
+            msg = "\n".join([f"{one.get('name')}: {one.get('value')}" for one in msg1])
+            break  # 如果成功签到，则跳出重试循环
+        except Exception as e:
+            msg += f"签到失败: {str(e)}，重试中...\n"
+            continue  # 发生异常则重试
+    else:
+        msg += "多次尝试后签到失败，请检查网络或cookie状态。\n"
     send("V2EX 签到结果", msg)
     return msg
 
