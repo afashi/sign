@@ -60,7 +60,7 @@ def start(cookie):
 
 def higiniSign(cookie, msg):
     # 先获取签到的参数
-    sign_index = "https://www.hifiti.com/"
+    sign_index = "https://hifiti.com/"
     headers = {
         'Cookie': cookie,
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
@@ -70,13 +70,13 @@ def higiniSign(cookie, msg):
     result = re.search(r"var sign = \"([\w\d]+)\";", rsp_text)
     sign = result.group(1)
     # 再请求签到页面
-    sign_in_url = "https://www.hifini.com/sg_sign.htm"
+    sign_in_url = "https://hifiti.com/sg_sign.htm"
     headers = {
         'Cookie': cookie,
         'authority': 'www.hifini.com',
         'accept': 'text/plain, */*; q=0.01',
         'accept-language': 'zh-CN,zh;q=0.9,und;q=0.8',
-        'referer': 'https://www.hifini.com/',
+        'referer': 'https://hifiti.com/',
         'sec-ch-ua': '"Chromium";v="122", "Not(A:Brand";v="24", "Google Chrome";v="122"',
         'sec-ch-ua-mobile': '?0',
         'sec-ch-ua-platform': '"Windows"',
