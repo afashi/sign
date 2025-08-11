@@ -67,8 +67,8 @@ def higiniSign(cookie, msg):
     }
     rsp = requests.get(sign_index, headers=headers)
     rsp_text = rsp.text
-    result = re.search(r"var sign = \"([\w\d]+)\";", rsp_text)
-    sign = result.group(1)
+    # result = re.search(r"var sign = \"([\w\d]+)\";", rsp_text)
+    # sign = result.group(1)
     # 再请求签到页面
     sign_in_url = "https://hifiti.com/sg_sign.htm"
     headers = {
@@ -88,7 +88,8 @@ def higiniSign(cookie, msg):
         "upgrade-insecure-requests": '1',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
     }
-    rsp = requests.post(url=sign_in_url, headers=headers, data={"sign": sign}, timeout=15, verify=False)
+    # rsp = requests.post(url=sign_in_url, headers=headers, data={"sign": sign}, timeout=15, verify=False)
+    rsp = requests.post(url=sign_in_url, headers=headers, timeout=15, verify=False)
     rsp_text = rsp.text
     success = False
     if "今天已经签过啦！" in rsp_text:
