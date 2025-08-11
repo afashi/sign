@@ -60,7 +60,7 @@ def start(cookie):
 
 def higiniSign(cookie, msg):
     # 先获取签到的参数
-    sign_index = "https://www.hifini.com/"
+    sign_index = "https://www.hifiti.com/"
     headers = {
         'Cookie': cookie,
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
